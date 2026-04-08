@@ -1,0 +1,11 @@
+{
+  "name": "quickbite-ecosystem",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node build-all.js"
+  },
+  "devDependencies": {
+    "fs-extra": "^11.3.4"
+  }
+}

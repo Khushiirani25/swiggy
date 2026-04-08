@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/app/(.*)", "destination": "/app/index.html" },
+    { "source": "/partner/(.*)", "destination": "/partner/index.html" },
+    { "source": "/driver/(.*)", "destination": "/driver/index.html" },
+    { "source": "/admin/(.*)", "destination": "/admin/index.html" }
+  ]
+}
