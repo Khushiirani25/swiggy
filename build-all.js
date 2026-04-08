@@ -35,10 +35,17 @@ async function build() {
     const indexPath = path.join(destDist, 'index.html');
     if (fs.existsSync(indexPath)) {
       let html = fs.readFileSync(indexPath, 'utf8');
-      // Prefix all root-level assets with the app name (e.g. /_expo -> /app/_expo)
-      html = html.replace(/(href|src)="\/(_expo|assets|static|favicon|manifest|glyphicons)/g, `$1="/${app.name}/$2`);
+      
+      // Smarter regex: prefixes any absolute path that isn't already prefixed or external
+      html = html.replace(/(href|src)="\/([^"]+)"/g, (match, attr, p) => {
+        if (p.startsWith(app.name + '/') || p.startsWith('http') || p.startsWith('//')) {
+          return match;
+        }
+        return `${attr}="/${app.name}/${p}"`;
+      });
+      
       fs.writeFileSync(indexPath, html);
-      console.log(`🔧 Paths fixed for ${app.name.toUpperCase()}`);
+      console.log(`🔧 Smarter paths fixed for ${app.name.toUpperCase()}`);
     }
 
     console.log(`✅ ${app.name.toUpperCase()} build moved to /${app.name}`);
