@@ -11,6 +11,10 @@
   "scripts": {
     "build": "node build-all.js"
   },
+  "overrides": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
   "devDependencies": {
     "fs-extra": "^11.3.4"
   }
