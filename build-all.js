@@ -4,7 +4,7 @@ const path = require('path');
 
 async function build() {
   const root = process.cwd();
-  const dist = path.join(root, 'public_html');
+  const dist = path.join(root, 'dist');
   
   // 1. Clean previous dist
   console.log('🧹 Cleaning dist...');
@@ -23,12 +23,6 @@ async function build() {
     console.log(`\n🚀 Building ${app.name.toUpperCase()}...`);
     const appDir = path.join(root, app.path);
     
-    // Install deps if missing
-    if (!fs.existsSync(path.join(appDir, 'node_modules'))) {
-      console.log(`📦 Installing deps for ${app.name}...`);
-      execSync('npm install', { cwd: appDir, stdio: 'inherit' });
-    }
-
     // Build
     execSync(app.buildCmd, { cwd: appDir, stdio: 'inherit' });
     
@@ -44,7 +38,7 @@ async function build() {
   fs.copySync(path.join(root, 'index.html'), path.join(dist, 'index.html'));
   fs.copySync(path.join(root, 'gateway.css'), path.join(dist, 'gateway.css'));
 
-  console.log('\n✨ UNIFIED ECOSYSTEM READY IN /public_html');
+  console.log('\n✨ UNIFIED ECOSYSTEM READY IN /dist');
 }
 
 build().catch(err => {

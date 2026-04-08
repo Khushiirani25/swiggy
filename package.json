@@ -2,6 +2,12 @@
   "name": "quickbite-ecosystem",
   "version": "1.0.0",
   "private": true,
+  "workspaces": [
+    "admin-dashboard",
+    "customer-app",
+    "delivery-app",
+    "restaurant-app"
+  ],
   "scripts": {
     "build": "node build-all.js"
   },
