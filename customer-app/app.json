@@ -23,6 +23,7 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
+      "baseUrl": "/app",
       "favicon": "./assets/favicon.png",
       "shortName": "QuickBite",
       "display": "standalone",

@@ -23,6 +23,7 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
+      "baseUrl": "/partner",
       "favicon": "./assets/favicon.png",
       "shortName": "QB Partner",
       "display": "standalone",

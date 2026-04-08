@@ -23,6 +23,7 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
+      "baseUrl": "/driver",
       "favicon": "./assets/favicon.png",
       "shortName": "QB Driver",
       "display": "standalone",
