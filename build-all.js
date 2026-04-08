@@ -30,6 +30,17 @@ async function build() {
     const sourceDist = path.join(appDir, app.buildDist);
     const destDist = path.join(dist, app.name);
     fs.copySync(sourceDist, destDist);
+
+    // FIX PATHS for sub-folder hosting
+    const indexPath = path.join(destDist, 'index.html');
+    if (fs.existsSync(indexPath)) {
+      let html = fs.readFileSync(indexPath, 'utf8');
+      // Prefix all root-level assets with the app name (e.g. /_expo -> /app/_expo)
+      html = html.replace(/(href|src)="\/(_expo|assets|static|favicon|manifest|glyphicons)/g, `$1="/${app.name}/$2`);
+      fs.writeFileSync(indexPath, html);
+      console.log(`🔧 Paths fixed for ${app.name.toUpperCase()}`);
+    }
+
     console.log(`✅ ${app.name.toUpperCase()} build moved to /${app.name}`);
   }
 
