@@ -1,0 +1,63 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 1. Users Collection
+    match /users/{userId} {
+      // Allow users to read/write their own profiles, EXCEPT they cannot grant themselves approval
+      allow read: if request.auth != null && (request.auth.uid == userId || request.auth.token.email == 'admin@quickbite.com');
+      
+      allow create: if request.auth != null && request.auth.uid == userId 
+                    && request.resource.data.approval_status == 'pending';
+                    
+      allow update: if request.auth != null && request.auth.uid == userId 
+                    && request.resource.data.approval_status == resource.data.approval_status;
+      
+      // Admin override capability
+      allow update, delete: if request.auth != null && request.auth.token.email == 'admin@quickbite.com';
+    }
+    
+    // 2. Restaurants Collection
+    match /restaurants/{restaurantId} {
+      // Anyone can read restaurant info (to browse)
+      allow read: if true;
+      
+      // Only the restaurant owner (whose UID matches the Doc ID) or admin can write
+      allow write: if (request.auth != null && (request.auth.uid == restaurantId || request.auth.token.email == 'admin@quickbite.com'));
+      
+      // Nested Menu Items
+      match /menu_items/{itemId} {
+        allow read: if true;
+        allow write: if (request.auth != null && (request.auth.uid == restaurantId || request.auth.token.email == 'admin@quickbite.com'));
+      }
+    }
+    
+    // 3. Orders Collection
+    match /orders/{orderId} {
+      // Customer: Can read their own orders. Can create an order.
+      // Restaurant: Can read orders assigned to their restaurantId. Can update status.
+      // Delivery Worker: Can read active orders assigned to them. Can update delivery status.
+      allow create: if request.auth != null && request.resource.data.customerId == request.auth.uid;
+      allow read, update: if request.auth != null && (
+        resource.data.customerId == request.auth.uid || 
+        resource.data.restaurantOwnerId == request.auth.uid || 
+        resource.data.driverId == request.auth.uid ||
+        request.auth.token.email == 'admin@quickbite.com'
+      );
+      allow delete: if request.auth != null && request.auth.token.email == 'admin@quickbite.com'; // Only admin can delete an order
+    }
+    
+    // 4. Delivery Partners Collection
+    match /delivery_partners/{driverId} {
+      allow read: if request.auth != null; // Other authenticated users can see driver metadata like name/vehicle
+      allow write: if request.auth != null && request.auth.uid == driverId;
+    }
+    
+    // 5. Live Tracking (Subcollection under orders)
+    match /orders/{orderId}/live_tracking/{trackingId} {
+      // Driver can update it. Customer can read it.
+      allow read: if request.auth != null && get(/databases/$(database)/documents/orders/$(orderId)).data.customerId == request.auth.uid;
+      allow write: if request.auth != null && get(/databases/$(database)/documents/orders/$(orderId)).data.driverId == request.auth.uid;
+    }
+  }
+}
