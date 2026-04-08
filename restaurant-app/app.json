@@ -23,7 +23,12 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "shortName": "QB Partner",
+      "display": "standalone",
+      "themeColor": "#3B82F6",
+      "backgroundColor": "#ffffff",
+      "description": "QuickBite Restaurant Management Portal"
     }
   }
 }

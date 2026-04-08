@@ -23,7 +23,12 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "shortName": "QB Driver",
+      "display": "standalone",
+      "themeColor": "#10B981",
+      "backgroundColor": "#ffffff",
+      "description": "QuickBite Driver Logistics Portal"
     }
   }
 }

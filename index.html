@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuickBite | Ecosystem Gateway</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#FF5A5F">
     <link rel="stylesheet" href="gateway.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
 </head>
@@ -50,5 +52,15 @@
             <p>&copy; 2026 QuickBite Logistics. All systems operational.</p>
         </footer>
     </main>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                .then(reg => console.log('✅ Service Worker Registered'))
+                .catch(err => console.log('❌ Service Worker Failed', err));
+            });
+        }
+    </script>
 </body>
 </html>
