@@ -3,64 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickBite | Ecosystem Gateway</title>
+    <title>QuickBite | Unified Ecosystem Gateway</title>
     <link rel="manifest" href="manifest.webmanifest">
     <meta name="theme-color" content="#FF5A5F">
     <link rel="stylesheet" href="gateway.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="glow-bg"></div>
+    <div class="mesh-bg"></div>
+    
     <main class="container">
         <header>
-            <div class="logo">Q</div>
+            <div class="logo-stack">
+                <div class="logo">Q</div>
+                <div class="ecosystem-badge">U N I F I E D</div>
+            </div>
             <h1>QuickBite <span class="highlight">Ecosystem</span></h1>
-            <p>Select your portal to enter the marketplace</p>
+            <p class="subtitle">Your single gateway to the entire marketplace infrastructure.</p>
         </header>
 
         <section class="portal-grid">
             <a href="/app" class="card">
-                <div class="icon">🍔</div>
-                <h3>Order Food</h3>
-                <p>Browse local restaurants and order your favorite meals.</p>
-                <div class="tag">CUSTOMER</div>
+                <div class="card-glass"></div>
+                <div class="icon">🍱</div>
+                <div class="content">
+                    <h3>Consumer App</h3>
+                    <p>Order food, track deliveries, and manage your account.</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="tag customer">CUSTOMER PORTAL</div>
             </a>
 
             <a href="/partner" class="card">
-                <div class="icon">👩‍🍳</div>
-                <h3>Manage Partner</h3>
-                <p>Accept orders, update menues, and scale your kitchen.</p>
-                <div class="tag vendor">RESTAURANT</div>
+                <div class="card-glass"></div>
+                <div class="icon">🍳</div>
+                <div class="content">
+                    <h3>Restaurant Hub</h3>
+                    <p>Manage menus, kitchen orders, and sales analytics.</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="tag vendor">VENDOR PORTAL</div>
             </a>
 
             <a href="/driver" class="card">
-                <div class="icon">🚴</div>
-                <h3>Delivery Fleet</h3>
-                <p>Active orders tracking and delivery logistics portal.</p>
-                <div class="tag driver">PARTNER</div>
+                <div class="icon">🛵</div>
+                <div class="content">
+                    <h3>Logistics Fleet</h3>
+                    <p>Manage deliveries, earnings, and fleet status.</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="tag driver">DRIVER PORTAL</div>
             </a>
 
-            <a href="/admin" class="card">
-                <div class="icon">🛡️</div>
-                <h3>Admin Citadel</h3>
-                <p>System-wide clearances, CRM, and global fleet control.</p>
+            <a href="/admin" class="card admin-card">
+                <div class="icon">💠</div>
+                <div class="content">
+                    <h3>Central Command</h3>
+                    <p>Global monitoring, CRM, and system-wide overrides.</p>
+                </div>
+                <div class="arrow">→</div>
                 <div class="tag admin">SUPERADMIN</div>
             </a>
         </section>
 
         <footer>
-            <p>&copy; 2026 QuickBite Logistics. All systems operational.</p>
+            <div class="status">
+                <span class="pulse"></span>
+                Systems Operational
+            </div>
+            <p>&copy; 2026 QuickBite Logistics. All rights reserved.</p>
         </footer>
     </main>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                .then(reg => console.log('✅ Service Worker Registered'))
-                .catch(err => console.log('❌ Service Worker Failed', err));
-            });
-        }
-    </script>
 </body>
 </html>
