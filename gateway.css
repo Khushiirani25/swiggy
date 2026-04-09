@@ -1,6 +1,6 @@
 :root {
-    --primary: #FF5A5F;
-    --primary-glow: rgba(255, 90, 95, 0.4);
+    --primary: #FF5200;
+    --primary-glow: rgba(255, 82, 0, 0.4);
     --bg: #0A0C10;
     --surface: #14171F;
     --surface-hover: #1C2029;
@@ -106,7 +106,7 @@ h1 {
 }
 
 .highlight {
-    background: linear-gradient(135deg, #FF5A5F 0%, #F59E0B 100%);
+    background: linear-gradient(135deg, #FF5200 0%, #F59E0B 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -191,7 +191,7 @@ h1 {
     border-radius: 6px;
 }
 
-.tag.customer { background: rgba(255, 90, 95, 0.1); color: #FF5A5F; }
+.tag.customer { background: rgba(255, 82, 0, 0.1); color: #FF5200; }
 .tag.vendor { background: rgba(59, 130, 246, 0.1); color: #3B82F6; }
 .tag.driver { background: rgba(16, 185, 129, 0.1); color: #10B981; }
 .tag.admin { background: rgba(168, 85, 247, 0.1); color: #A855F7; }

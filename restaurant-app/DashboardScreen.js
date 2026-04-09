@@ -105,7 +105,7 @@ export default function DashboardScreen({ navigation }) {
           <TouchableOpacity style={styles.statusToggle} onPress={() => navigation.navigate('Menu')}>
             <Text style={styles.statusText}>Manage Menu</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleLogout}><Text style={{color: '#FF5A5F'}}>Logout</Text></TouchableOpacity>
+          <TouchableOpacity onPress={handleLogout}><Text style={{color: '#FF5200'}}>Logout</Text></TouchableOpacity>
         </View>
       </View>
 
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   orderTotal: { color: '#10B981', fontWeight: '800', fontSize: 16 },
   paymentMethod: { color: '#ffffff', fontSize: 13, fontWeight: '600' },
   actionRow: { flexDirection: 'row', gap: 10 },
-  btnAccept: { flex: 1, backgroundColor: '#FF5A5F', paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
+  btnAccept: { flex: 1, backgroundColor: '#FF5200', paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
   btnAcceptText: { color: '#ffffff', fontWeight: '800', fontSize: 14 },
   btnReady: { flex: 1, backgroundColor: '#10B981', paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
   btnReadyText: { color: '#ffffff', fontWeight: '800', fontSize: 14 },

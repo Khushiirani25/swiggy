@@ -22,17 +22,23 @@ export default function AuthScreen() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       
-      // Ensure profile exists in DB
-      const userDoc = await getDoc(doc(db, 'users', user.uid));
-      if (!userDoc.exists()) {
-        await setDoc(doc(db, 'users', user.uid), {
-          name: user.displayName || user.email.split('@')[0],
-          role: 'customer',
-          email: user.email,
-          auth_provider: 'google'
-        });
+      // Ensure profile exists in DB (swallow permission errors if rules are locked)
+      try {
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        if (!userDoc.exists()) {
+          await setDoc(doc(db, 'users', user.uid), {
+            name: user.displayName || user.email.split('@')[0],
+            role: 'customer',
+            email: user.email,
+            auth_provider: 'google'
+          });
+        }
+      } catch(dbErr) {
+        console.warn("Firestore profile sync skipped: ", dbErr.message);
       }
+      
     } catch (error) {
+      // Only alert if the actual Firebase Auth fails
       alert("Google Login Failed: " + error.message);
     } finally {
       setLoading(false);
@@ -49,14 +55,18 @@ export default function AuthScreen() {
       } else {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+        
         if (user) {
-          await setDoc(doc(db, 'users', user.uid), {
-            name: email.split('@')[0],
-            role: 'customer',
-            email: email
-          });
+          try {
+            await setDoc(doc(db, 'users', user.uid), {
+              name: email.split('@')[0],
+              role: 'customer',
+              email: email
+            });
+          } catch(dbErr) {
+            console.warn("Firestore profile creation skipped: ", dbErr.message);
+          }
         }
-        alert("Registration successful!");
       }
     } catch (error) {
       alert(error.message);
@@ -113,17 +123,17 @@ export default function AuthScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FAFAFC', justifyContent: 'center', alignItems: 'center' },
-  card: { width: '85%', maxWidth: 400, backgroundColor: '#fff', padding: 30, borderRadius: 20, shadowColor: '#000', shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.1, shadowRadius: 20, elevation: 5 },
-  brand: { fontSize: 28, fontWeight: '900', color: '#FF5A5F', textAlign: 'center', marginBottom: 5 },
-  title: { fontSize: 18, color: '#6B7280', textAlign: 'center', marginBottom: 30, fontWeight: '600' },
-  input: { backgroundColor: '#F3F4F6', borderRadius: 12, padding: 15, marginBottom: 15, fontSize: 16 },
-  authBtn: { backgroundColor: '#FF5A5F', paddingVertical: 16, borderRadius: 12, alignItems: 'center', marginTop: 10 },
-  authBtnText: { color: '#ffffff', fontSize: 16, fontWeight: '800' },
-  dividerContainer: { flexDirection: 'row', alignItems: 'center', marginVertical: 20 },
-  dividerLine: { flex: 1, height: 1, backgroundColor: '#E5E7EB' },
-  dividerText: { marginHorizontal: 15, color: '#9CA3AF', fontWeight: '800' },
-  googleBtn: { backgroundColor: '#ffffff', paddingVertical: 14, borderRadius: 12, alignItems: 'center', borderWidth: 1, borderColor: '#D1D5DB' },
-  googleBtnText: { color: '#374151', fontSize: 16, fontWeight: '700' },
-  toggleText: { textAlign: 'center', color: '#FF5A5F', fontWeight: '600' }
+  container: { flex: 1, backgroundColor: '#ffffff', justifyContent: 'center', alignItems: 'center' },
+  card: { width: '90%', maxWidth: 400, backgroundColor: '#ffffff', padding: 30, borderRadius: 16, shadowColor: '#0c0c0c', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.1, shadowRadius: 10, elevation: 5 },
+  brand: { fontSize: 32, fontWeight: '900', color: '#FF5200', textAlign: 'center', marginBottom: 5 },
+  title: { fontSize: 16, color: '#686b78', textAlign: 'center', marginBottom: 30, fontWeight: '700' },
+  input: { backgroundColor: '#ffffff', borderRadius: 0, borderBottomWidth: 1, borderBottomColor: '#d4d5d9', paddingVertical: 15, paddingHorizontal: 5, marginBottom: 20, fontSize: 16, color: '#02060C', fontWeight: '500' },
+  authBtn: { backgroundColor: '#FF5200', paddingVertical: 16, borderRadius: 0, alignItems: 'center', marginTop: 10 },
+  authBtnText: { color: '#ffffff', fontSize: 14, fontWeight: '900', textTransform: 'uppercase' },
+  dividerContainer: { flexDirection: 'row', alignItems: 'center', marginVertical: 25 },
+  dividerLine: { flex: 1, height: 1, backgroundColor: '#e9e9eb' },
+  dividerText: { marginHorizontal: 15, color: '#686b78', fontWeight: '800' },
+  googleBtn: { backgroundColor: '#ffffff', paddingVertical: 14, borderRadius: 0, alignItems: 'center', borderWidth: 1, borderColor: '#d4d5d9' },
+  googleBtnText: { color: '#02060C', fontSize: 14, fontWeight: '800', textTransform: 'uppercase' },
+  toggleText: { textAlign: 'center', color: '#282c3f', fontWeight: '600', fontSize: 14 }
 });

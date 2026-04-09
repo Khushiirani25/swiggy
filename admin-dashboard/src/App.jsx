@@ -210,7 +210,7 @@ export default function App() {
     return (
       <div style={styles.authContainer}>
         <div style={styles.authCard}>
-          <ShieldCheck size={48} color="#FF5A5F" style={{margin: '0 auto', display: 'block', marginBottom: '20px'}} />
+          <ShieldCheck size={48} color="#FF5200" style={{margin: '0 auto', display: 'block', marginBottom: '20px'}} />
           <h1 style={{textAlign: 'center', marginBottom: '10px'}}>Admin Citadel</h1>
           <p style={{textAlign: 'center', color: '#6B7280', marginBottom: '30px'}}>Restricted access portal.</p>
           
@@ -443,13 +443,13 @@ export default function App() {
 
 const styles = {
   authContainer: { height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#0F121A' },
-  authCard: { background: '#1A1D24', padding: '40px', borderRadius: '15px', border: '1px solid #FF5A5F', width: '350px' },
+  authCard: { background: '#1A1D24', padding: '40px', borderRadius: '15px', border: '1px solid #FF5200', width: '350px' },
   input: { padding: '12px 16px', borderRadius: '8px', border: '1px solid #374151', backgroundColor: '#242830', color: 'white', outline: 'none', fontSize: '1rem', width: '100%', boxSizing: 'border-box' },
-  authBtn: { width: '100%', padding: '12px', background: '#FF5A5F', color: '#fff', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' },
+  authBtn: { width: '100%', padding: '12px', background: '#FF5200', color: '#fff', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' },
   primaryBtn: { padding: '0.75rem 1.5rem', backgroundColor: '#3B82F6', color: 'white', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', border: 'none', cursor: 'pointer' },
   successBtn: { padding: '0.75rem 1.5rem', backgroundColor: '#10B981', color: 'white', borderRadius: '8px', fontWeight: 'bold', border: 'none', cursor: 'pointer' },
   tableBox: { backgroundColor: '#1A1D24', padding: '20px', borderRadius: '15px', border: '1px solid #374151' },
-  badgedDot: { width: '8px', height: '8px', backgroundColor: '#FF5A5F', borderRadius: '50%', marginLeft: 'auto' },
+  badgedDot: { width: '8px', height: '8px', backgroundColor: '#FF5200', borderRadius: '50%', marginLeft: 'auto' },
   roleTag: { background: '#242830', padding: '4px 10px', borderRadius: '6px', fontSize: '12px', color: '#3B82F6', fontWeight: '800' },
   iconBtn: { background: 'none', border: 'none', cursor: 'pointer', padding: '5px' },
   orderIconBox: { width: 48, height: 48, background: '#242830', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#3B82F6' },
